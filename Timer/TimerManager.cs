@@ -1,17 +1,13 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading;
-using System.Threading.Tasks;
 
-namespace Timer
+namespace TimerWatch
 {
     /// <summary>
     /// Time manage class
     /// </summary>
     class TimerManager
-    {   
+    {
         public event EventHandler<MessageEventArgs> MessagingEvent;
         protected virtual void OnMessaging(MessageEventArgs e)
         {
@@ -19,24 +15,19 @@ namespace Timer
         }
 
         /// <summary>
-        /// Timer back counter
+        /// CountdownTimer back counter
         /// </summary>
         /// <param name="startTime">Input starting time</param>
         /// <exception cref="ArgumentException">If starttim less thann 1 throw ArgumentException</exception>>
-        public void TimerSecond (int startTime)
+        public void CountdownTimer(int delayMs)
         {
-            if (startTime <= 0)
+            if (delayMs <= 0)
             {
-                throw new ArgumentException(nameof(startTime)); 
+                throw new ArgumentException(nameof(delayMs));
             }
 
-            const int DELAYSECOND = 1000;
-            while (startTime > 0)
-            {
-                Thread.Sleep(DELAYSECOND);
-                startTime--;
-                OnMessaging(new MessageEventArgs("Second " + startTime));
-            }
+            Thread.Sleep(delayMs);
+            OnMessaging(new MessageEventArgs("Elapsed seconds " + delayMs / 1000));
         }
     }
 }

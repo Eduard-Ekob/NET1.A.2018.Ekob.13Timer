@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace Timer
+namespace TimerWatch
 {
     class Program
     {
@@ -15,7 +15,8 @@ namespace Timer
             var observer2 = new Observer2();
             timeManager.MessagingEvent += observer1.Update;
             timeManager.MessagingEvent += observer2.Update;
-            timeManager.TimerSecond(20);
+
+            timeManager.CountdownTimer(10000);
 
             Console.ReadLine();
         }
